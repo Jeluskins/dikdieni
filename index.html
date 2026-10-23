@@ -71,11 +71,11 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Person Cutout Layer Base Styles */
+        /* Person Cutout Layer Base Styles - PACELTI AUGSTĀK (bottom: 15%) */
         .person-overlay {
             position: absolute;
-            bottom: 0;
-            height: 100%;
+            bottom: 15%; /* Pacelti dīkdieņi augstāk no apakšas */
+            height: 85%;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom center;
@@ -134,11 +134,11 @@
             transform: scale(1.04) translateY(-6px);
         }
 
-        /* Model Info Floating Badge Card */
+        /* Model Info Floating Badge Card - PIELĀGOTS AUGSTUMS */
         .info-card {
             position: absolute;
             left: 50%;
-            bottom: 5%;
+            bottom: 3%;
             transform: translateX(-50%) translateY(20px);
             opacity: 0;
             pointer-events: none;
@@ -150,7 +150,7 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 16px;
-            padding: 1.25rem 1rem;
+            padding: 1rem 0.8rem;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.05);
         }
@@ -184,44 +184,7 @@
             background: rgba(255, 215, 0, 0.25);
         }
 
-        /* Row Layout for Main 3 Podcast Links */
-        .podcast-links-row {
-            display: flex;
-            flex-direction: row;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            width: 100%;
-            margin-top: 12px;
-            padding-top: 10px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .podcast-links-row a {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 10px;
-            background: rgba(255, 255, 255, 0.08);
-            padding: 5px 8px;
-            border-radius: 20px;
-            white-space: nowrap;
-            transition: all 0.2s ease;
-        }
-
-        .podcast-links-row a:hover {
-            background: rgba(255, 215, 0, 0.2);
-            color: #ffd700;
-        }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
+        /* Row Layout for Main 4 Podcast Links */
         .podcast-links-row {
             display: flex;
             flex-direction: row;
@@ -253,6 +216,12 @@
             background: rgba(255, 215, 0, 0.2);
             color: #ffd700;
         }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-black">
@@ -278,24 +247,23 @@
         </div>
 
         <!-- Model 2: Kristaps -->
-        <!-- Model 2: Kristaps -->
         <div class="person-overlay person-kristaps" 
-            id="person-kristaps" 
-            data-name="Kristaps Bičs" 
-            data-role="Executive Trench" 
-            data-quote="Briefcase, boots & total runway command."
-            data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/kristapsbic"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@kristapsbic"}]'
-            aria-label="Kristaps">
+             id="person-kristaps" 
+             data-name="Kristaps Bičs" 
+             data-role="Executive Trench" 
+             data-quote="Briefcase, boots & total runway command."
+             data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/kristapsbic"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@kristapsbic"}]'
+             aria-label="Kristaps">
         </div>
 
         <!-- Model 3: Roberts -->
         <div class="person-overlay person-roberts" 
-            id="person-roberts" 
-            data-name="Roberts Silavs" 
-            data-role="Geometric Mesh Master" 
-            data-quote="Monochrome bodysuit with golden fan elegance."
-            data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/robertssilavs"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@robertssilavs"}]'
-            aria-label="Roberts">
+             id="person-roberts" 
+             data-name="Roberts Silavs" 
+             data-role="Geometric Mesh Master" 
+             data-quote="Monochrome bodysuit with golden fan elegance."
+             data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/robertssilavs"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@robertssilavs"}]'
+             aria-label="Roberts">
         </div>
 
         <!-- Dynamic Floating Info Card Modal -->
