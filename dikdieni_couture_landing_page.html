@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DIKDIENI COUTURE</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Montserrat:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-touch-callout: none;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #050505;
+            font-family: 'Montserrat', sans-serif;
+            color: #ffffff;
+        }
+
+        .font-cinzel {
+            font-family: 'Cinzel', serif;
+        }
+
+        /* 9:16 Aspect Ratio Phone Frame Container */
+        .phone-container {
+            position: relative;
+            height: 100vh;
+            max-height: 100vh;
+            aspect-ratio: 9 / 16;
+            margin: 0 auto;
+            overflow: hidden;
+            background-color: #000000;
+            box-shadow: 0 0 50px rgba(255, 215, 0, 0.15), 0 0 100px rgba(0, 0, 0, 0.9);
+        }
+
+        /* Background Runway Image Base Layer */
+        .bg-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('dikdieni.jpg');
+            background-size: cover;
+            background-position: center top;
+            transition: filter 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 1;
+        }
+
+        /* Dark Overlay Gradient for Ambience */
+        .ambient-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 25%, rgba(0,0,0,0.1) 75%, rgba(0,0,0,0.85) 100%);
+            z-index: 2;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        /* Person Cutout Layer Base Styles */
+        .person-overlay {
+            position: absolute;
+            bottom: 0;
+            height: 100%;
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: bottom center;
+            transition: filter 0.35s ease, transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.35s ease;
+            cursor: pointer;
+            z-index: 10;
+            will-change: transform, filter, opacity;
+        }
+
+        /* Specific Alignment for Each Runway Model Cutout */
+        /* Left: Rihards */
+        .person-rihards {
+            left: 2%;
+            width: 44%;
+            background-image: url('rihards.png');
+            background-position: left 22% bottom 0%;
+        }
+
+        /* Center: Kristaps */
+        .person-kristaps {
+            left: 29%;
+            width: 42%;
+            background-image: url('kristaps.png');
+            background-position: center bottom 0%;
+            z-index: 11;
+        }
+
+        /* Right: Roberts */
+        .person-roberts {
+            right: 2%;
+            width: 42%;
+            background-image: url('roberts.png');
+            background-position: right 20% bottom 0%;
+        }
+
+        /* Focus States - Driven by container hovering/active class */
+        .phone-container.has-focus .bg-layer {
+            filter: brightness(0.28) contrast(1.1) blur(1px);
+            transform: scale(1.02);
+        }
+
+        .phone-container.has-focus .ambient-overlay {
+            opacity: 0.9;
+        }
+
+        /* Non-focused models get darker & semi-transparent */
+        .phone-container.has-focus .person-overlay:not(.is-focused) {
+            filter: brightness(0.25) opacity(0.45) grayscale(0.5);
+            transform: scale(0.97);
+        }
+
+        /* Focused Model highlight effects */
+        .person-overlay.is-focused {
+            z-index: 30 !important;
+            filter: brightness(1.2) contrast(1.08) drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)) drop-shadow(0 10px 15px rgba(0,0,0,0.8));
+            transform: scale(1.04) translateY(-6px);
+        }
+
+        /* Model Info Floating Badge Card */
+        .info-card {
+            position: absolute;
+            left: 50%;
+            bottom: 5%;
+            transform: translateX(-50%) translateY(20px);
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            z-index: 40;
+            width: 90%;
+            background: rgba(15, 15, 20, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 16px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.05);
+        }
+
+        .info-card.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateX(-50%) translateY(0);
+        }
+
+        /* Individual Social Links Styling */
+        .individual-socials {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 8px 0;
+        }
+
+        .individual-socials a {
+            color: #ffd700;
+            font-size: 11px;
+            text-decoration: none;
+            background: rgba(255, 215, 0, 0.1);
+            padding: 4px 10px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            transition: background 0.2s ease;
+        }
+
+        .individual-socials a:hover {
+            background: rgba(255, 215, 0, 0.25);
+        }
+
+        /* Row Layout for Main 3 Podcast Links */
+        .podcast-links-row {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            width: 100%;
+            margin-top: 12px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .podcast-links-row a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 10px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 5px 8px;
+            border-radius: 20px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .podcast-links-row a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .podcast-links-row {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .podcast-links-row a {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 9px;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 4px 7px;
+            border-radius: 16px;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .podcast-links-row a:hover {
+            background: rgba(255, 215, 0, 0.2);
+            color: #ffd700;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen bg-black">
+
+    <!-- Mobile 9:16 Aspect Frame Outer Container -->
+    <main class="phone-container relative w-full flex flex-col justify-between" id="container">
+
+        <!-- Background Image Layer -->
+        <div class="bg-layer" id="bgLayer"></div>
+
+        <!-- Ambient Dark Overlay -->
+        <div class="ambient-overlay"></div>
+
+        <!-- Interactive Cutout Overlays -->
+        <!-- Model 1: Rihards -->
+        <div class="person-overlay person-rihards" 
+             id="person-rihards" 
+             data-name="Rihards Sniegs" 
+             data-role="Avant-Garde Icon" 
+             data-quote="Pink platforms & haute headwear redefined."
+             data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/rihardssniegs"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@rihardssniegs"}]'
+             aria-label="Rihards">
+        </div>
+
+        <!-- Model 2: Kristaps -->
+        <!-- Model 2: Kristaps -->
+        <div class="person-overlay person-kristaps" 
+            id="person-kristaps" 
+            data-name="Kristaps Bičs" 
+            data-role="Executive Trench" 
+            data-quote="Briefcase, boots & total runway command."
+            data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/kristapsbic"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@kristapsbic"}]'
+            aria-label="Kristaps">
+        </div>
+
+        <!-- Model 3: Roberts -->
+        <div class="person-overlay person-roberts" 
+            id="person-roberts" 
+            data-name="Roberts Silavs" 
+            data-role="Geometric Mesh Master" 
+            data-quote="Monochrome bodysuit with golden fan elegance."
+            data-socials='[{"label":"Instagram","icon":"fab fa-instagram","url":"https://www.instagram.com/robertssilavs"},{"label":"TikTok","icon":"fab fa-tiktok","url":"https://www.tiktok.com/@robertssilavs"}]'
+            aria-label="Roberts">
+        </div>
+
+        <!-- Dynamic Floating Info Card Modal -->
+        <div class="info-card" id="infoCard">
+            <div class="text-[9px] uppercase tracking-[0.3em] text-yellow-400 font-semibold mb-1" id="cardRole">
+                Geometric Mesh Master
+            </div>
+            <h2 class="font-cinzel text-xl font-bold tracking-widest text-white mb-1" id="cardName">
+                Roberts Silavs
+            </h2>
+            <p class="text-xs text-gray-300 italic font-light px-2" id="cardQuote">
+                "Monochrome bodysuit with golden fan elegance."
+            </p>
+
+            <!-- Individual Social Links (Injected dynamically) -->
+            <div class="individual-socials" id="cardSocials"></div>
+
+            <!-- Podcast Links (4 in a Row) -->
+            <div class="podcast-links-row">
+                <a href="https://www.instagram.com/dikdieni" target="_blank" rel="noopener">
+                    <i class="fab fa-instagram text-pink-400"></i> Instagram: @dikdieni
+                </a>
+                <a href="https://www.tiktok.com/@dikdieni" target="_blank" rel="noopener">
+                    <i class="fab fa-tiktok text-cyan-400"></i> TikTok: @dikdieni
+                </a>
+                <a href="https://www.youtube.com/@dikdieni" target="_blank" rel="noopener">
+                    <i class="fab fa-youtube text-red-500"></i> YouTube: @dikdieni
+                </a>
+                <a href="https://open.spotify.com/show/06f7jndg1U7T5O8K89O8m5" target="_blank" rel="noopener">
+                    <i class="fab fa-spotify text-green-500"></i> Spotify: Dīkdieņi
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- JavaScript Interactivity -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('container');
+            const overlays = document.querySelectorAll('.person-overlay');
+            const infoCard = document.getElementById('infoCard');
+            const cardName = document.getElementById('cardName');
+            const cardRole = document.getElementById('cardRole');
+            const cardQuote = document.getElementById('cardQuote');
+            const cardSocials = document.getElementById('cardSocials');
+
+            let activePerson = null;
+
+            function focusPerson(overlay) {
+                if (!overlay) return;
+
+                activePerson = overlay;
+                container.classList.add('has-focus');
+
+                overlays.forEach(el => el.classList.remove('is-focused'));
+                overlay.classList.add('is-focused');
+
+                cardName.textContent = overlay.dataset.name;
+                cardRole.textContent = overlay.dataset.role;
+                cardQuote.textContent = `"${overlay.dataset.quote}"`;
+
+                // Render individual social links dynamically
+                cardSocials.innerHTML = '';
+                if (overlay.dataset.socials) {
+                    const links = JSON.parse(overlay.dataset.socials);
+                    links.forEach(link => {
+                        const a = document.createElement('a');
+                        a.href = link.url;
+                        a.target = '_blank';
+                        a.rel = 'noopener';
+                        a.innerHTML = `<i class="${link.icon}"></i> ${link.label}`;
+                        cardSocials.appendChild(a);
+                    });
+                }
+
+                infoCard.classList.add('active');
+            }
+
+            function clearFocus() {
+                activePerson = null;
+                container.classList.remove('has-focus');
+                overlays.forEach(el => el.classList.remove('is-focused'));
+                infoCard.classList.remove('active');
+            }
+
+            overlays.forEach(overlay => {
+                overlay.addEventListener('mouseenter', () => focusPerson(overlay));
+                overlay.addEventListener('mouseleave', () => clearFocus());
+
+                overlay.addEventListener('touchstart', (e) => {
+                    e.stopPropagation();
+                    if (activePerson === overlay) {
+                        clearFocus();
+                    } else {
+                        focusPerson(overlay);
+                    }
+                }, { passive: true });
+            });
+
+            container.addEventListener('touchstart', (e) => {
+                if (!e.target.classList.contains('person-overlay') && !infoCard.contains(e.target)) {
+                    clearFocus();
+                }
+            }, { passive: true });
+
+            overlays.forEach(overlay => {
+                overlay.setAttribute('tabindex', '0');
+                overlay.addEventListener('focus', () => focusPerson(overlay));
+                overlay.addEventListener('blur', () => clearFocus());
+            });
+        });
+    </script>
+</body>
+</html>
