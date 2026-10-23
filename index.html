@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -71,11 +71,11 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Person Cutout Layer Base Styles - PACELTI AUGSTĀK (bottom: 15%) */
+        /* Person Cutout Layer Base Styles - Pacelti vēl augstāk */
         .person-overlay {
             position: absolute;
-            bottom: 15%; /* Pacelti dīkdieņi augstāk no apakšas */
-            height: 85%;
+            bottom: 22%; /* Pacelti augstāk */
+            height: 78%;
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom center;
@@ -134,11 +134,11 @@
             transform: scale(1.04) translateY(-6px);
         }
 
-        /* Model Info Floating Badge Card - PIELĀGOTS AUGSTUMS */
+        /* Model Info Floating Badge Card - Pacelta augstāk, lai nenogrieztos */
         .info-card {
             position: absolute;
             left: 50%;
-            bottom: 3%;
+            bottom: 6%; /* Pacelta augstāk no pašas apakšas */
             transform: translateX(-50%) translateY(20px);
             opacity: 0;
             pointer-events: none;
@@ -150,7 +150,7 @@
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 16px;
-            padding: 1rem 0.8rem;
+            padding: 0.9rem 0.8rem;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.05);
         }
@@ -165,17 +165,17 @@
         .individual-socials {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 8px 0;
+            gap: 8px;
+            margin: 6px 0;
         }
 
         .individual-socials a {
             color: #ffd700;
-            font-size: 11px;
+            font-size: 10px;
             text-decoration: none;
             background: rgba(255, 215, 0, 0.1);
-            padding: 4px 10px;
-            border-radius: 12px;
+            padding: 3px 8px;
+            border-radius: 10px;
             border: 1px solid rgba(255, 215, 0, 0.2);
             transition: background 0.2s ease;
         }
@@ -184,7 +184,7 @@
             background: rgba(255, 215, 0, 0.25);
         }
 
-        /* Row Layout for Main 4 Podcast Links */
+        /* Row Layout for Main Podcast Links */
         .podcast-links-row {
             display: flex;
             flex-direction: row;
@@ -193,21 +193,21 @@
             align-items: center;
             gap: 4px;
             width: 100%;
-            margin-top: 10px;
-            padding-top: 8px;
+            margin-top: 8px;
+            padding-top: 6px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .podcast-links-row a {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 3px;
             color: #ffffff;
             text-decoration: none;
-            font-size: 9px;
+            font-size: 8.5px;
             background: rgba(255, 255, 255, 0.08);
-            padding: 4px 7px;
-            border-radius: 16px;
+            padding: 3px 6px;
+            border-radius: 14px;
             white-space: nowrap;
             transition: all 0.2s ease;
         }
@@ -268,13 +268,13 @@
 
         <!-- Dynamic Floating Info Card Modal -->
         <div class="info-card" id="infoCard">
-            <div class="text-[9px] uppercase tracking-[0.3em] text-yellow-400 font-semibold mb-1" id="cardRole">
+            <div class="text-[8px] uppercase tracking-[0.3em] text-yellow-400 font-semibold mb-0.5" id="cardRole">
                 Geometric Mesh Master
             </div>
-            <h2 class="font-cinzel text-xl font-bold tracking-widest text-white mb-1" id="cardName">
+            <h2 class="font-cinzel text-base font-bold tracking-widest text-white mb-0.5" id="cardName">
                 Roberts Silavs
             </h2>
-            <p class="text-xs text-gray-300 italic font-light px-2" id="cardQuote">
+            <p class="text-[10px] text-gray-300 italic font-light px-1" id="cardQuote">
                 "Monochrome bodysuit with golden fan elegance."
             </p>
 
