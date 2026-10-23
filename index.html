@@ -40,7 +40,9 @@
         .phone-container {
             position: relative;
             height: 100vh;
+            height: 100dvh; /* Dinamiskais augstums, kas ņem vērā mobilo adrešu joslu */
             max-height: 100vh;
+            max-height: 100dvh;
             aspect-ratio: 9 / 16;
             margin: 0 auto;
             overflow: hidden;
@@ -71,11 +73,11 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Person Cutout Layer Base Styles - ATSTARPE GAN APUKŠĀ, GAN AUGŠĀ */
+        /* Person Cutout Layer Base Styles */
         .person-overlay {
             position: absolute;
-            bottom: 20%; /* Atstarpe no apakšas */
-            height: 70%; /* Samazināts augstums, lai atstātu ~10% brīvu vietu augšpusē */
+            bottom: 22%; /* Atstarpe apakšā */
+            height: 68%; /* Saglabā atstarpi arī augšpusē */
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom center;
@@ -126,26 +128,27 @@
         .person-overlay.is-focused {
             z-index: 30 !important;
             filter: brightness(1.2) contrast(1.08) drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)) drop-shadow(0 10px 15px rgba(0,0,0,0.8));
-            transform: scale(1.03) translateY(-4px); /* Pielāgots mērogs, lai nepieskartos augšai */
+            transform: scale(1.03) translateY(-4px);
         }
 
-        /* Model Info Floating Badge Card */
+        /* Model Info Floating Badge Card - PACELTA AUGSTĀK (bottom: 10%) */
         .info-card {
             position: absolute;
             left: 50%;
-            bottom: 5%;
+            bottom: 10%; /* Pacelta drošā attālumā no pārlūka apakšmalas */
             transform: translateX(-50%) translateY(20px);
             opacity: 0;
             pointer-events: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 40;
             width: 90%;
-            background: rgba(15, 15, 20, 0.92);
+            max-width: 380px;
+            background: rgba(15, 15, 20, 0.94);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 215, 0, 0.3);
             border-radius: 16px;
-            padding: 0.9rem 0.8rem;
+            padding: 0.75rem 0.75rem;
             text-align: center;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8), inset 0 0 15px rgba(255, 215, 0, 0.05);
         }
@@ -161,7 +164,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin: 6px 0;
+            margin: 5px 0;
         }
 
         .individual-socials a {
@@ -188,7 +191,7 @@
             align-items: center;
             gap: 4px;
             width: 100%;
-            margin-top: 8px;
+            margin-top: 6px;
             padding-top: 6px;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
