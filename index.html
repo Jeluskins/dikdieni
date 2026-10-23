@@ -54,7 +54,7 @@
             inset: 0;
             width: 100%;
             height: 100%;
-            background-image: url('dikdieni.png');
+            background-image: url('dikdieni.jpg');
             background-size: cover;
             background-position: center top;
             transition: filter 0.4s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -71,10 +71,10 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Person Cutout Layer Base Styles - Pacelti vēl augstāk */
+        /* Person Cutout Layer Base Styles */
         .person-overlay {
             position: absolute;
-            bottom: 22%; /* Pacelti augstāk */
+            bottom: 22%;
             height: 78%;
             background-size: contain;
             background-repeat: no-repeat;
@@ -86,7 +86,6 @@
         }
 
         /* Specific Alignment for Each Runway Model Cutout */
-        /* Left: Rihards */
         .person-rihards {
             left: 2%;
             width: 44%;
@@ -94,7 +93,6 @@
             background-position: left 22% bottom 0%;
         }
 
-        /* Center: Kristaps */
         .person-kristaps {
             left: 29%;
             width: 42%;
@@ -103,7 +101,6 @@
             z-index: 11;
         }
 
-        /* Right: Roberts */
         .person-roberts {
             right: 2%;
             width: 42%;
@@ -111,7 +108,7 @@
             background-position: right 20% bottom 0%;
         }
 
-        /* Focus States - Driven by container hovering/active class */
+        /* Focus States */
         .phone-container.has-focus .bg-layer {
             filter: brightness(0.28) contrast(1.1) blur(1px);
             transform: scale(1.02);
@@ -121,31 +118,29 @@
             opacity: 0.9;
         }
 
-        /* Non-focused models get darker & semi-transparent */
         .phone-container.has-focus .person-overlay:not(.is-focused) {
             filter: brightness(0.25) opacity(0.45) grayscale(0.5);
             transform: scale(0.97);
         }
 
-        /* Focused Model highlight effects */
         .person-overlay.is-focused {
             z-index: 30 !important;
             filter: brightness(1.2) contrast(1.08) drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)) drop-shadow(0 10px 15px rgba(0,0,0,0.8));
             transform: scale(1.04) translateY(-6px);
         }
 
-        /* Model Info Floating Badge Card - Pacelta augstāk, lai nenogrieztos */
+        /* Model Info Floating Badge Card */
         .info-card {
             position: absolute;
             left: 50%;
-            bottom: 6%; /* Pacelta augstāk no pašas apakšas */
+            bottom: 6%;
             transform: translateX(-50%) translateY(20px);
             opacity: 0;
             pointer-events: none;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
             z-index: 40;
             width: 90%;
-            background: rgba(15, 15, 20, 0.88);
+            background: rgba(15, 15, 20, 0.92);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 215, 0, 0.3);
@@ -157,7 +152,7 @@
 
         .info-card.active {
             opacity: 1;
-            pointer-events: auto;
+            pointer-events: auto; /* Ļauj uzspiest uz kartītes elementiem */
             transform: translateX(-50%) translateY(0);
         }
 
@@ -216,17 +211,10 @@
             background: rgba(255, 215, 0, 0.2);
             color: #ffd700;
         }
-
-        .gold-gradient-text {
-            background: linear-gradient(135deg, #FFF5C0 0%, #D4AF37 50%, #AA7C11 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
     </style>
 </head>
 <body class="flex items-center justify-center min-h-screen bg-black">
 
-    <!-- Mobile 9:16 Aspect Frame Outer Container -->
     <main class="phone-container relative w-full flex flex-col justify-between" id="container">
 
         <!-- Background Image Layer -->
@@ -236,7 +224,6 @@
         <div class="ambient-overlay"></div>
 
         <!-- Interactive Cutout Overlays -->
-        <!-- Model 1: Rihards -->
         <div class="person-overlay person-rihards" 
              id="person-rihards" 
              data-name="Rihards Sniegs" 
@@ -246,7 +233,6 @@
              aria-label="Rihards">
         </div>
 
-        <!-- Model 2: Kristaps -->
         <div class="person-overlay person-kristaps" 
              id="person-kristaps" 
              data-name="Kristaps Bičkausks" 
@@ -256,7 +242,6 @@
              aria-label="Kristaps">
         </div>
 
-        <!-- Model 3: Roberts -->
         <div class="person-overlay person-roberts" 
              id="person-roberts" 
              data-name="Roberts Silavs" 
@@ -269,31 +254,31 @@
         <!-- Dynamic Floating Info Card Modal -->
         <div class="info-card" id="infoCard">
             <div class="text-[8px] uppercase tracking-[0.3em] text-yellow-400 font-semibold mb-0.5" id="cardRole">
-                Geometric Mesh Master
+                Role
             </div>
             <h2 class="font-cinzel text-base font-bold tracking-widest text-white mb-0.5" id="cardName">
-                Roberts Silavs
+                Name
             </h2>
             <p class="text-[10px] text-gray-300 italic font-light px-1" id="cardQuote">
-                "Monochrome bodysuit with golden fan elegance."
+                "Quote"
             </p>
 
-            <!-- Individual Social Links (Injected dynamically) -->
+            <!-- Individual Social Links -->
             <div class="individual-socials" id="cardSocials"></div>
 
-            <!-- Podcast Links (4 in a Row) -->
+            <!-- Podcast Links -->
             <div class="podcast-links-row">
                 <a href="https://www.instagram.com/dikdieni" target="_blank" rel="noopener">
-                    <i class="fab fa-instagram text-pink-400"></i> Instagram: @dikdieni
+                    <i class="fab fa-instagram text-pink-400"></i> IG: @dikdieni
                 </a>
                 <a href="https://www.tiktok.com/@dikdieni" target="_blank" rel="noopener">
-                    <i class="fab fa-tiktok text-cyan-400"></i> TikTok: @dikdieni
+                    <i class="fab fa-tiktok text-cyan-400"></i> TT: @dikdieni
                 </a>
                 <a href="https://www.youtube.com/@dikdieni" target="_blank" rel="noopener">
-                    <i class="fab fa-youtube text-red-500"></i> YouTube: @dikdieni
+                    <i class="fab fa-youtube text-red-500"></i> YouTube
                 </a>
                 <a href="https://open.spotify.com/show/06f7jndg1U7T5O8K89O8m5" target="_blank" rel="noopener">
-                    <i class="fab fa-spotify text-green-500"></i> Spotify: Dīkdieņi
+                    <i class="fab fa-spotify text-green-500"></i> Spotify
                 </a>
             </div>
         </div>
@@ -312,9 +297,16 @@
             const cardSocials = document.getElementById('cardSocials');
 
             let activePerson = null;
+            let hideTimeout = null;
 
             function focusPerson(overlay) {
                 if (!overlay) return;
+                
+                // Atceļ aizvēršanas taimeri, ja tāds bija iesākts
+                if (hideTimeout) {
+                    clearTimeout(hideTimeout);
+                    hideTimeout = null;
+                }
 
                 activePerson = overlay;
                 container.classList.add('has-focus');
@@ -326,7 +318,6 @@
                 cardRole.textContent = overlay.dataset.role;
                 cardQuote.textContent = `"${overlay.dataset.quote}"`;
 
-                // Render individual social links dynamically
                 cardSocials.innerHTML = '';
                 if (overlay.dataset.socials) {
                     const links = JSON.parse(overlay.dataset.socials);
@@ -344,12 +335,16 @@
             }
 
             function clearFocus() {
-                activePerson = null;
-                container.classList.remove('has-focus');
-                overlays.forEach(el => el.classList.remove('is-focused'));
-                infoCard.classList.remove('active');
+                // Ieliek nelielu aizturi, lai pelepārbaudītu vai nepārvietojās uz kartīti
+                hideTimeout = setTimeout(() => {
+                    activePerson = null;
+                    container.classList.remove('has-focus');
+                    overlays.forEach(el => el.classList.remove('is-focused'));
+                    infoCard.classList.remove('active');
+                }, 100);
             }
 
+            // Notikumi pašiem cilvēkiem
             overlays.forEach(overlay => {
                 overlay.addEventListener('mouseenter', () => focusPerson(overlay));
                 overlay.addEventListener('mouseleave', () => clearFocus());
@@ -364,17 +359,23 @@
                 }, { passive: true });
             });
 
+            // Notikumi informācijas kartītei, lai tā nepazustu, kad pele ir uz tās
+            infoCard.addEventListener('mouseenter', () => {
+                if (hideTimeout) {
+                    clearTimeout(hideTimeout);
+                    hideTimeout = null;
+                }
+            });
+
+            infoCard.addEventListener('mouseleave', () => {
+                clearFocus();
+            });
+
             container.addEventListener('touchstart', (e) => {
                 if (!e.target.classList.contains('person-overlay') && !infoCard.contains(e.target)) {
                     clearFocus();
                 }
             }, { passive: true });
-
-            overlays.forEach(overlay => {
-                overlay.setAttribute('tabindex', '0');
-                overlay.addEventListener('focus', () => focusPerson(overlay));
-                overlay.addEventListener('blur', () => clearFocus());
-            });
         });
     </script>
 </body>
