@@ -71,11 +71,11 @@
             transition: opacity 0.4s ease;
         }
 
-        /* Person Cutout Layer Base Styles */
+        /* Person Cutout Layer Base Styles - ATSTARPE GAN APUKŠĀ, GAN AUGŠĀ */
         .person-overlay {
             position: absolute;
-            bottom: 22%;
-            height: 78%;
+            bottom: 20%; /* Atstarpe no apakšas */
+            height: 70%; /* Samazināts augstums, lai atstātu ~10% brīvu vietu augšpusē */
             background-size: contain;
             background-repeat: no-repeat;
             background-position: bottom center;
@@ -126,14 +126,14 @@
         .person-overlay.is-focused {
             z-index: 30 !important;
             filter: brightness(1.2) contrast(1.08) drop-shadow(0 0 25px rgba(255, 215, 0, 0.6)) drop-shadow(0 10px 15px rgba(0,0,0,0.8));
-            transform: scale(1.04) translateY(-6px);
+            transform: scale(1.03) translateY(-4px); /* Pielāgots mērogs, lai nepieskartos augšai */
         }
 
         /* Model Info Floating Badge Card */
         .info-card {
             position: absolute;
             left: 50%;
-            bottom: 6%;
+            bottom: 5%;
             transform: translateX(-50%) translateY(20px);
             opacity: 0;
             pointer-events: none;
@@ -152,7 +152,7 @@
 
         .info-card.active {
             opacity: 1;
-            pointer-events: auto; /* Ļauj uzspiest uz kartītes elementiem */
+            pointer-events: auto;
             transform: translateX(-50%) translateY(0);
         }
 
@@ -302,7 +302,6 @@
             function focusPerson(overlay) {
                 if (!overlay) return;
                 
-                // Atceļ aizvēršanas taimeri, ja tāds bija iesākts
                 if (hideTimeout) {
                     clearTimeout(hideTimeout);
                     hideTimeout = null;
@@ -335,7 +334,6 @@
             }
 
             function clearFocus() {
-                // Ieliek nelielu aizturi, lai pelepārbaudītu vai nepārvietojās uz kartīti
                 hideTimeout = setTimeout(() => {
                     activePerson = null;
                     container.classList.remove('has-focus');
@@ -344,7 +342,6 @@
                 }, 100);
             }
 
-            // Notikumi pašiem cilvēkiem
             overlays.forEach(overlay => {
                 overlay.addEventListener('mouseenter', () => focusPerson(overlay));
                 overlay.addEventListener('mouseleave', () => clearFocus());
@@ -359,7 +356,6 @@
                 }, { passive: true });
             });
 
-            // Notikumi informācijas kartītei, lai tā nepazustu, kad pele ir uz tās
             infoCard.addEventListener('mouseenter', () => {
                 if (hideTimeout) {
                     clearTimeout(hideTimeout);
