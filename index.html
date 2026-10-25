@@ -105,7 +105,6 @@
             width: 46%;
             background-image: url('rihards.png');
             background-position: center bottom;
-            z-index: 11; /* Higher than Kristaps (11) */
         }
 
         .person-kristaps {
@@ -114,7 +113,7 @@
             bottom: 12%;
             background-image: url('kristaps.png');
             background-position: center bottom;
-            z-index: 12;
+            z-index: 11;
         }
 
         .person-roberts {
@@ -122,13 +121,6 @@
             width: 51%;
             background-image: url('roberts.png');
             background-position: center bottom;
-            z-index: 10;
-        }
-
-        /* Dynamically elevate whichever person is hovered/focused */
-        .person-overlay:hover,
-        .person-overlay.is-focused {
-            z-index: 50 !important;
         }
 
         /* Focus States */
